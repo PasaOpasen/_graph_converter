@@ -4,6 +4,30 @@ from typing import Union, List, Dict, Any
 import os
 from pathlib import Path
 import io
+import shutil
+
+
+def mkdir_of_file(file_path: Union[str, os.PathLike]):
+    """
+    для этого файла создаёт папку, в которой он должен лежать
+    """
+    Path(file_path).parent.mkdir(parents=True, exist_ok=True)
+
+
+def mkdir(dir: Union[str, os.PathLike]):
+    """mkdir with parents"""
+    Path(dir).mkdir(parents=True, exist_ok=True)
+
+
+def touch(path: Union[str, os.PathLike]):
+    """makes empty file, makes directories for this file automatically"""
+    mkdir_of_file(path)
+    Path(path).touch()
+
+
+def rmdir(path: Union[str, os.PathLike]):
+    """rm dir without errors"""
+    shutil.rmtree(path, ignore_errors=True)
 
 
 def read_json(path: Union[str, os.PathLike]) -> Union[Dict[str, Any], List]:
