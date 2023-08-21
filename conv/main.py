@@ -1,7 +1,7 @@
 
 #region IMPORTS
 
-from typing import Dict, Union, Set, Tuple, List, Literal
+from typing import Dict, Union, Set, Tuple, List, Literal, Sequence
 
 from pathlib import Path
 from dataclasses import dataclass, field
@@ -33,8 +33,8 @@ def get_port_ends(name: str, edges: Dict[str, LinkModel]) -> List[str]:
             res.append(edge['source'])
             is_out = True
 
-        if is_in and is_out:
-            raise ValueError(f"{name} port is used as input and output port both!")
+        # if is_in and is_out:
+        #     raise ValueError(f"{name} port is used as input and output port both!")
 
     return res
 
@@ -106,21 +106,36 @@ class Condition:
         for op in ops:
             self._op_process(op)
 
+    @staticmethod
+    def expand(conditions: Sequence['Condition']):
+        """add primary condition link to close conditions"""
+        for i, c1 in enumerate(conditions):
+            for j, c2 in enumerate(conditions):
+                if i == j:
+                    continue
+
+                c2_id = c2.data['id']
+                if c1.links_true.intersection(c2.links_condition):
+                    c1.links_true.add(c2_id)
+                if c1.links_false.intersection(c2.links_condition):
+                    c1.links_false.add(c2_id)
+
 
     def get_code(self, true_counts: int, false_counts: int) -> str:
         lines = []
         for left, op, right in self.ops:
             tp = self.nodes[left]['type']
 
-            left = _replace_spaces(left)
-            left = (
-                left if tp == 'parameter' else f"___{left}____"
+            _left = _replace_spaces(self.analyses[left])
+            _left = (
+                _left if tp == 'parameter' else f"___{_left}____"
             )
 
             lines.append(
-                f"{self.analyses[left]} "
-                f"{self.analyses[op]} "
-                f"{self.analyses[right]}"
+                _left + ' ' + ' '.join(
+                    _replace_spaces(self.analyses[k])
+                    for k in (op, right)
+                )
             )
 
         if len(lines) == 1:
@@ -205,6 +220,8 @@ def conv_dict(d: JsonInput) -> Dict[int, Union[YamlNormalNode, YamlStatusNode]]:
 
     assert outputs, 'no output nodes'
 
+    Condition.expand(conditions)
+
     hash2number = {
         c.data['id']: i
         for i, c in enumerate(conditions, 1)
@@ -223,7 +240,7 @@ def conv_dict(d: JsonInput) -> Dict[int, Union[YamlNormalNode, YamlStatusNode]]:
         result[len(hash2number) + i] = dict(
             code=(
                 f"___{_replace_spaces(cont)}"
-                if n['type'] == 'analyses'
+                if n['type'] == 'analyse'
                 else f".res {cont['title']}"
             )
         )
