@@ -6,21 +6,14 @@ from typing import Dict, Union, Set, Tuple, List, Literal, Sequence
 from pathlib import Path
 from dataclasses import dataclass, field
 
-from .utils import read_json, dumps_yaml, write_text, mkdir_of_file
+from conv.utils.files import read_json, dumps_yaml, write_text, mkdir_of_file
 
 from .types.input import JsonInput, LinkModel, NodeModel, BranchingModel, OperatorModel, AnalysesInput
 from .types.output import YamlTree, YamlNormalNode, YamlStatusNode
+from .utils.strings import fix_string_name, name_to_tree_call
+
 
 #endregion
-
-
-def _replace_spaces(s: str) -> str:
-    return s.replace(' ', '_').replace('-', '_').replace('.', '_')
-
-
-def _to_tree_call(s: str) -> str:
-    # return f"___{sum(ord(_s) for _s in s)}"
-    return "___${" + s + "}"
 
 
 def get_port_ends(name: str, edges: Dict[str, LinkModel]) -> List[str]:
@@ -131,14 +124,14 @@ class Condition:
         for left, op, right in self.ops:
             tp = self.nodes[left]['type']
 
-            _left = _replace_spaces(self.analyses[left])
+            _left = fix_string_name(self.analyses[left])
             _left = (
-                _left if tp == 'parameter' else f"{_to_tree_call(left)}____"
+                _left if tp == 'parameter' else f"{name_to_tree_call(left)}____"
             )
 
             lines.append(
                 _left + ' ' + ' '.join(
-                    _replace_spaces(self.analyses[k])
+                    fix_string_name(self.analyses[k])
                     for k in (op, right)
                 )
             )
@@ -248,9 +241,9 @@ def conv_dict(d: JsonInput) -> Dict[int, Union[YamlNormalNode, YamlStatusNode]]:
         cont = contents[n['id']]
         result[len(conditions) + i] = dict(
             code=(
-                _to_tree_call(_replace_spaces(cont))
+                name_to_tree_call(fix_string_name(cont))
                 if n['type'] == 'analyse'
-                else f".res {_replace_spaces(cont['title'])}"
+                else f".res {fix_string_name(cont['title'])}"
             )
         )
 
@@ -262,7 +255,7 @@ def conv_dict(d: JsonInput) -> Dict[int, Union[YamlNormalNode, YamlStatusNode]]:
 def conv(js_path: str, yaml_path: str):
 
     dct = read_json(js_path)
-    f_name = _replace_spaces(Path(js_path).stem)
+    f_name = fix_string_name(Path(js_path).stem)
 
     d = conv_dict(dct)
 
