@@ -241,13 +241,15 @@ def conv_dict(d: JsonInput) -> Dict[int, Union[YamlNormalNode, YamlStatusNode]]:
 
     for i, n in enumerate(outputs, 1):
         cont = contents[n['id']]
-        result[len(hash2number) + i] = dict(
+        result[len(conditions) + i] = dict(
             code=(
                 "___${" + _replace_spaces(cont) + "}"
                 if n['type'] == 'analyse'
                 else f".res {cont['title']}"
             )
         )
+
+    # assert sorted(result.keys()) == list(range(1, len(conditions) + len(outputs) + 1))
 
     return result
 
