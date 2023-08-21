@@ -18,6 +18,10 @@ def _replace_spaces(s: str) -> str:
     return s.replace(' ', '_').replace('-', '_').replace('.', '_')
 
 
+def _to_tree_call(s: str) -> str:
+    return "___${" + s + "}"
+
+
 def get_port_ends(name: str, edges: Dict[str, LinkModel]) -> List[str]:
     """returns labels of the entities which are connected by edges with are connected to this port"""
     res = []
@@ -128,7 +132,7 @@ class Condition:
 
             _left = _replace_spaces(self.analyses[left])
             _left = (
-                _left if tp == 'parameter' else "___${" + _left + "}____"
+                _left if tp == 'parameter' else f"{_to_tree_call(left)}____"
             )
 
             lines.append(
@@ -243,7 +247,7 @@ def conv_dict(d: JsonInput) -> Dict[int, Union[YamlNormalNode, YamlStatusNode]]:
         cont = contents[n['id']]
         result[len(conditions) + i] = dict(
             code=(
-                "___${" + _replace_spaces(cont) + "}"
+                _to_tree_call(_replace_spaces(cont))
                 if n['type'] == 'analyse'
                 else f".res {_replace_spaces(cont['title'])}"
             )
