@@ -103,7 +103,6 @@ class Condition:
         for op in ops:
             self._op_process(op)
 
-        print()
 
 
 
@@ -121,10 +120,20 @@ def conv_dict(d: JsonInput) -> Dict[str, Any]:
     nodes: Dict[str, NodeModel] = _nodes['models']
 
     conditions: List[Condition] = []
+    all_ins: Set[str] = set()
+    """ids of input models of all conditions"""
     for n in nodes.values():
         if n['type'] == 'branching':
             c = Condition(n, edges=edges, nodes=nodes)
             conditions.append(c)
+            all_ins.update(c.links_condition)
+
+    outputs = [
+        n for n in nodes.values()
+        if n['id'] not in all_ins and n['type'] in ('analyse', 'result')
+    ]
+
+    assert outputs, 'no output nodes'
 
 
 
