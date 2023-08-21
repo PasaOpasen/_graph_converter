@@ -62,12 +62,12 @@ NodeModel: TypeAlias = Tuple[PortModel]
 
 
 class JsonLayerLink(TypedDict):
-    type: Literal['diagram-links', 'diagram-nodes']
+    type: Literal['diagram-links']
     models: Dict[str, LinkModel]
 
 
 class JsonLayerNode(TypedDict):
-    type: Literal['diagram-links', 'diagram-nodes']
+    type: Literal['diagram-nodes']
     models: Dict[str, NodeModel]
 
 
