@@ -7,7 +7,7 @@ from dataclasses import dataclass, field
 
 from .utils import read_json, dumps_yaml, write_text, mkdir_of_file
 
-from .types.input import JsonInput, LinkModel, NodeModel, BranchingModel
+from .types.input import JsonInput, LinkModel, NodeModel, BranchingModel, OperatorModel
 
 #endregion
 
@@ -25,10 +25,10 @@ def get_port_ends(name: str, edges: Dict[str, LinkModel]) -> List[str]:
 
     for edge in edges.values():
         if edge['sourcePort'] == name:
-            res.append(edge['source'])
+            res.append(edge['target'])
             is_in = True
         elif edge['targetPort'] == name:
-            res.append(edge['target'])
+            res.append(edge['source'])
             is_out = True
 
         if is_in and is_out:
@@ -61,19 +61,47 @@ class Condition:
                 self.links_condition.add(i)
         self._fill()
 
+    def _expand1(self, name: Literal['true', 'false', 'condition']) -> List[str]:
+        """adds direct inputs and outputs nodes to links"""
+        port = next((p for p in self.data['ports'] if p['name'].endswith(name)), None)['id']
+        assert port, f'no {name} port'
+        entities = get_port_ends(port, self.edges)
+        assert entities, f"nothing connected to {name} port"
+        getattr(self, f"links_{name}").update(entities)
+        return entities
+
+    def _op_process(self, operator: str):
+
+        model: OperatorModel = self.nodes[operator]
+        left_ports = [p for p in model['ports'] if p['alignment'] == 'left']
+        assert len(left_ports) == 2, left_ports
+
+        words = []
+        for p in left_ports:
+            entities = get_port_ends(p['id'], self.edges)
+            assert len(entities) == 1, entities
+            ent = entities[0]
+            self.links_condition.add(ent)
+            words.append(ent)
+
+        left, right = words
+        if any(c.isalpha() for c in right):  # change order to ensure the word with alpha will be at left
+            right, left = left, right
+
+        self.ops.append(
+            (left, operator, right)
+        )
+
     def _fill(self):
 
-        def expand1(name: Literal['true', 'false', 'condition']) -> List[str]:
-            port = next((p for p in self.data['ports'] if p['name'].endswith(name)), None)['id']
-            assert port, f'no {name} port'
-            entities = get_port_ends(port, self.edges)
-            assert entities, f"nothing connected to {name} port"
-            getattr(self, f"links_{name}").update(entities)
-            return entities
+        self._expand1('false')
+        self._expand1('true')
+        ops = self._expand1('condition')
 
-        expand1('false')
-        expand1('true')
-        ops = expand1('condition')
+        assert all(self.nodes[op]['type'] == 'operator' for op in ops), ops
+
+        for op in ops:
+            self._op_process(op)
 
         print()
 
