@@ -1,0 +1,32 @@
+{
+    "analyses": {
+        "130b4c02-91c2-4c32-9af5-d83715de252f": "витамин Б",
+        "997839c7-548e-460f-af50-b9a1e6eb2406": "Ferritin",
+        "3a79f155-24b3-4539-aa68-e02e8bfe80d8": "Билирубин",
+        "c896885f-8526-409d-9ddf-39e0d46b1738": "ТТГ",
+        "acc0f2d4-41ed-46aa-b734-3aad676591d4": "ЛПНП Анализ"
+    },
+    "diagramData": {
+        "id": "8f558fef-73d8-446a-9487-a2d0a6bc1885",
+        "offsetX": 356.42432247968753,
+        "offsetY": 280.5264978163714,
+        "zoom": 60.18749999999996,
+        "gridSize": 0,
+        "layers": [
+            {
+                "id": "38a62db2-de1a-4619-8894-76a0a730cecd",
+                "type": "diagram-links",
+                "isSvg": true,
+                "transformed": true,
+                "models": {}
+            },
+            {
+                "id": "3f1acbf4-b79d-40b0-8f6e-c24e740a1bda",
+                "type": "diagram-nodes",
+                "isSvg": false,
+                "transformed": true,
+                "models": {}
+            }
+        ]
+    }
+}
