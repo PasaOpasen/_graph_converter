@@ -113,6 +113,9 @@ class DiagramData(TypedDict):
     layers: Tuple[JsonLayerLink, JsonLayerNode]
 
 
+AnalysesInput: TypeAlias = Dict[str, Union[str, StatusNodeContent]]
+
+
 class JsonInput(TypedDict):
-    analyses: Dict[str, Union[str, StatusNodeContent]]
+    analyses: AnalysesInput
     diagramData: DiagramData

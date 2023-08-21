@@ -1,13 +1,15 @@
 
 #region IMPORTS
 
-from typing import Dict, Any, Set, Tuple, List, Literal
+from typing import Dict, Union, Set, Tuple, List, Literal
 
+from pathlib import Path
 from dataclasses import dataclass, field
 
 from .utils import read_json, dumps_yaml, write_text, mkdir_of_file
 
-from .types.input import JsonInput, LinkModel, NodeModel, BranchingModel, OperatorModel
+from .types.input import JsonInput, LinkModel, NodeModel, BranchingModel, OperatorModel, AnalysesInput
+from .types.output import YamlTree, YamlNormalNode, YamlStatusNode
 
 #endregion
 
@@ -40,6 +42,7 @@ def get_port_ends(name: str, edges: Dict[str, LinkModel]) -> List[str]:
 @dataclass
 class Condition:
     data: BranchingModel
+    analyses: AnalysesInput
     nodes: Dict[str, NodeModel]
     edges: Dict[str, LinkModel]
 
@@ -85,7 +88,7 @@ class Condition:
             words.append(ent)
 
         left, right = words
-        if any(c.isalpha() for c in right):  # change order to ensure the word with alpha will be at left
+        if self.nodes[left]['type'] == 'data':  # change order to ensure the parameter will be at left
             right, left = left, right
 
         self.ops.append(
@@ -104,13 +107,80 @@ class Condition:
             self._op_process(op)
 
 
+    def get_code(self, true_counts: int, false_counts: int) -> str:
+        lines = []
+        for left, op, right in self.ops:
+            tp = self.nodes[left]['type']
+
+            left = _replace_spaces(left)
+            left = (
+                left if tp == 'parameter' else f"___{left}____"
+            )
+
+            lines.append(
+                f"{self.analyses[left]} "
+                f"{self.analyses[op]} "
+                f"{self.analyses[right]}"
+            )
+
+        if len(lines) == 1:
+            expr = lines[0]
+        else:
+            expr = ' and '.join(f"({e})" for e in lines)
+
+        if true_counts == false_counts == 1:
+            return expr
+
+        #
+        # use yields shits
+        #
+
+        lines = [f"$expr {expr}"]
+
+        e = f"{expr} == True"
+        lines.extend(
+            [f'yield {e}'] * (true_counts - 1)
+        )
+        lines.append(e)
+
+        e = f"{expr} == False"
+        lines.extend(
+            [f'yield {e}'] * (false_counts - 1)
+        )
+        lines.append(e)
+
+        return '\n'.join(lines)
+
+    def as_node(self, hash2number: Dict[str, int]) -> YamlNormalNode:
+        res = dict(
+            children='',
+            code=''
+        )
+
+        true_results = sorted(
+            set(
+                hash2number[h] for h in self.links_true
+                if h in hash2number
+            )
+        )
+        assert true_results
+        false_results = sorted(
+            set(
+                hash2number[h] for h in self.links_false
+                if h in hash2number
+            )
+        )
+        assert false_results
+
+        res['code'] = self.get_code(len(true_results), len(false_results))
+        res['children'] = ' '.join(
+            str(i) for i in (true_results + false_results + [false_results[-1]])
+        )
+
+        return res
 
 
-
-
-
-
-def conv_dict(d: JsonInput) -> Dict[str, Any]:
+def conv_dict(d: JsonInput) -> Dict[int, Union[YamlNormalNode, YamlStatusNode]]:
 
     contents = d['analyses']
 
@@ -124,7 +194,7 @@ def conv_dict(d: JsonInput) -> Dict[str, Any]:
     """ids of input models of all conditions"""
     for n in nodes.values():
         if n['type'] == 'branching':
-            c = Condition(n, edges=edges, nodes=nodes)
+            c = Condition(n, edges=edges, nodes=nodes, analyses=contents)
             conditions.append(c)
             all_ins.update(c.links_condition)
 
@@ -144,17 +214,40 @@ def conv_dict(d: JsonInput) -> Dict[str, Any]:
         {n['id']: len(hash2number) + i for i, n in enumerate(outputs, 1)}
     )
 
+    result = {}
+    for i, c in enumerate(conditions, 1):
+        result[i] = c.as_node(hash2number)
 
-    return d
+    for i, n in enumerate(outputs, 1):
+        cont = contents[n['id']]
+        result[len(hash2number) + i] = dict(
+            code=(
+                f"___{_replace_spaces(cont)}"
+                if n['type'] == 'analyses'
+                else f".res {cont['title']}"
+            )
+        )
+
+    return result
 
 
 def conv(js_path: str, yaml_path: str):
 
     dct = read_json(js_path)
+    f_name = _replace_spaces(Path(js_path).stem)
 
     d = conv_dict(dct)
 
-    y = dumps_yaml(d)
+    yaml_tree: YamlTree = dict(
+        nodes=d,
+        user=0,
+        tag='',
+        description=f_name,
+        name=f_name,
+        statuses={'none': 'none'}
+    )
+
+    y = dumps_yaml(yaml_tree)
     mkdir_of_file(yaml_path)
     write_text(yaml_path, y)
 
