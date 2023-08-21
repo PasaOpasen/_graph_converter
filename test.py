@@ -1,6 +1,8 @@
 
 from pathlib import Path
 
+from traceback import print_exc
+
 from conv.main import conv
 
 
@@ -10,9 +12,13 @@ def main():
             continue
 
         print(f"processing {f}")
-        conv(
-            str(f), f"outputs/{f.stem}.yaml"
-        )
+        try:
+            conv(
+                str(f), f"outputs/{f.stem}.yaml"
+            )
+        except Exception:
+            print_exc()
+            print(f"error {f}")
 
 
 if __name__ == '__main__':
