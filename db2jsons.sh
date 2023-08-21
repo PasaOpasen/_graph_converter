@@ -20,5 +20,12 @@ do
     js=$dir/$name.json
     echo "$json" | python -m json.tool --no-ensure-ascii > $js
 
+    #
+    # remove empty graphs
+    #
+    if [ -n "$(cat $js | grep analyses | grep -o '{}')" ]
+    then
+        rm $js
+    fi
 
 done

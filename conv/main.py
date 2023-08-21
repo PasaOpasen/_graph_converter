@@ -19,5 +19,11 @@ def conv(js_path: str, yaml_path: str):
     write_text(yaml_path, y)
 
 
+if __name__ == '__main__':
+    conv(
+        '../inputs/ЛПНП.json',
+        '../tmp.yml'
+    )
+
 
 
