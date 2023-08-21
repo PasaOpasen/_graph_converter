@@ -1,10 +1,37 @@
 
-from typing import Dict, Any
+from typing import Dict, Any, TypedDict, Union, Literal, List
 
 from .utils import read_json, dumps_yaml, write_text, mkdir_of_file
 
 
-def conv_dict(d: Dict[str, Any]) -> Dict[str, Any]:
+#region TYPES
+
+class StatusNode(TypedDict):
+    title: str
+    description: str
+
+
+class JsonLayer(TypedDict):
+    type: Literal['diagram-links', 'diagram-nodes']
+    models: Dict[str, Dict[str, Any]]
+
+
+class JsonInput(TypedDict):
+    analyses: Dict[str, Union[str, StatusNode]]
+    diagramData: List[JsonLayer]
+
+
+#endregion
+
+
+def _replace_spaces(s: str) -> str:
+    return s.replace(' ', '_')
+
+
+def conv_dict(d: JsonInput) -> Dict[str, Any]:
+
+    contents = d['analyses']
+
     return d
 
 
@@ -18,12 +45,6 @@ def conv(js_path: str, yaml_path: str):
     mkdir_of_file(yaml_path)
     write_text(yaml_path, y)
 
-
-if __name__ == '__main__':
-    conv(
-        '../inputs/ЛПНП.json',
-        '../tmp.yml'
-    )
 
 
 
