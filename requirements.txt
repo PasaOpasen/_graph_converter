@@ -1,0 +1,3 @@
+orjson
+pyyaml
+typing_extensions
