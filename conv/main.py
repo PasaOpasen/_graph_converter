@@ -17,7 +17,7 @@ from .utils import read_json, dumps_yaml, write_text, mkdir_of_file
 
 #region TYPES
 
-class StatusNode(TypedDict):
+class StatusNodeContent(TypedDict):
     title: str
     description: str
 
@@ -72,7 +72,7 @@ class JsonLayerNode(TypedDict):
 
 
 class JsonInput(TypedDict):
-    analyses: Dict[str, Union[str, StatusNode]]
+    analyses: Dict[str, Union[str, StatusNodeContent]]
     diagramData: Tuple[JsonLayerLink, JsonLayerNode]
 
 
