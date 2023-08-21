@@ -31,6 +31,7 @@ class _NodePort(TypedDict):
     in_: bool
     """in json it is 'in'"""
     links: List[str]
+    alignment: Literal['left', 'right']
 
 
 class _NodeModel(TypedDict):
