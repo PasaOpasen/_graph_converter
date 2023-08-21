@@ -135,6 +135,14 @@ def conv_dict(d: JsonInput) -> Dict[str, Any]:
 
     assert outputs, 'no output nodes'
 
+    hash2number = {
+        c.data['id']: i
+        for i, c in enumerate(conditions, 1)
+    }
+    """string hash to node id"""
+    hash2number.update(
+        {n['id']: len(hash2number) + i for i, n in enumerate(outputs, 1)}
+    )
 
 
     return d
