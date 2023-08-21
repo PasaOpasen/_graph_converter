@@ -65,7 +65,34 @@ class DataModel(_NodeModel):
     ports: List[PortData]
 
 
-NodeModel: TypeAlias = Union[ParameterModel, DataModel]
+class PortOperator(_NodePort):
+    name: Literal['operator-out-blue', 'operator-in-blue', 'operator-in-red']
+
+
+class OperatorModel(_NodeModel):
+    type: Literal['operator']
+    ports: List[PortOperator]
+
+
+class PortBranching(_NodePort):
+    name: Literal['branching-out-true', 'branching-out-false', 'branching-in-condition']
+
+
+class BranchingModel(_NodeModel):
+    type: Literal['branching']
+    ports: List[PortBranching]
+
+
+class PortResult(_NodePort):
+    name: Literal['result-in-port']
+
+
+class ResultModel(_NodeModel):
+    type: Literal['result']
+    ports: List[PortResult]
+
+
+NodeModel: TypeAlias = Union[ParameterModel, DataModel, OperatorModel, BranchingModel, ResultModel]
 
 #endregion
 
