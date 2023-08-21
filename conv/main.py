@@ -15,7 +15,7 @@ from .types.output import YamlTree, YamlNormalNode, YamlStatusNode
 
 
 def _replace_spaces(s: str) -> str:
-    return s.replace(' ', '_').replace('-', '_')
+    return s.replace(' ', '_').replace('-', '_').replace('.', '_')
 
 
 def get_port_ends(name: str, edges: Dict[str, LinkModel]) -> List[str]:
@@ -245,7 +245,7 @@ def conv_dict(d: JsonInput) -> Dict[int, Union[YamlNormalNode, YamlStatusNode]]:
             code=(
                 "___${" + _replace_spaces(cont) + "}"
                 if n['type'] == 'analyse'
-                else f".res {cont['title']}"
+                else f".res {_replace_spaces(cont['title'])}"
             )
         )
 
