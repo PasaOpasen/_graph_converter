@@ -51,12 +51,21 @@ class PortParameter(_NodePort):
     name: Literal['Parameter-in-port', 'Parameter-out-port']
 
 
-class PortModel(_NodeModel):
+class ParameterModel(_NodeModel):
     type: Literal['parameter']
     ports: List[PortParameter]
 
 
-NodeModel: TypeAlias = Tuple[PortModel]
+class PortData(_NodePort):
+    name: Literal['data-out-blue']
+
+
+class DataModel(_NodeModel):
+    type: Literal['data']
+    ports: List[PortData]
+
+
+NodeModel: TypeAlias = Union[ParameterModel, DataModel]
 
 #endregion
 
