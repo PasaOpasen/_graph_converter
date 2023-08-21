@@ -189,7 +189,11 @@ class Condition:
 
         res['code'] = self.get_code(len(true_results), len(false_results))
         res['children'] = ' '.join(
-            str(i) for i in (true_results + false_results)
+            str(i) for i in (
+                true_results + false_results + (
+                    [false_results[-1]] if (len(true_results) + len(false_results) > 2) else []
+                )
+            )
         )
 
         return res
