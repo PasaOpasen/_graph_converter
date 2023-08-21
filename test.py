@@ -6,6 +6,9 @@ from conv.main import conv
 
 def main():
     for f in sorted(Path('inputs').glob('*.json')):
+        if f.stem.startswith('__'):
+            continue
+
         print(f"processing {f}")
         conv(
             str(f), f"outputs/{f.stem}.yaml"
