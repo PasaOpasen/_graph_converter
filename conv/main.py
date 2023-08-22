@@ -118,7 +118,6 @@ class Condition:
                 if c1.links_false.intersection(c2.links_condition):
                     c1.links_false.add(c2_id)
 
-
     def get_code(self, true_counts: int, false_counts: int) -> str:
         lines = []
         for left, op, right in self.ops:
@@ -126,7 +125,7 @@ class Condition:
 
             _left = fix_string_name(self.analyses[left])
             _left = (
-                _left if tp == 'parameter' else f"{name_to_tree_call(left)}____"
+                _left if tp == 'parameter' else f"{name_to_tree_call(_left)}____"
             )
 
             lines.append(

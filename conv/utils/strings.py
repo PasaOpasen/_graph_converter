@@ -3,6 +3,7 @@ from typing import Dict, Tuple, Sequence, List
 
 import re
 
+
 def fix_string_name(s: str) -> str:
     """
     fixes string to correct python name
