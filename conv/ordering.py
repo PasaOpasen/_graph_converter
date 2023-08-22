@@ -43,7 +43,7 @@ def order_graphs(directory: str, to_directory: Optional[str] = None):
     assert all_files, f"{directory} has not yamls"
 
     file2name = {
-        str(f): fix_string_name(str(f)) for f in all_files
+        str(f): fix_string_name(f.stem) for f in all_files
     }
     name2file = {v: k for k, v in file2name.items()}
     file2deps: Dict[str, Set[str]] = {
