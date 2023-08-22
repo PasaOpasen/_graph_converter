@@ -1,12 +1,7 @@
 
 from typing import Dict, Any, TypedDict, Union, Literal, List, Tuple
 
-import sys
-
-if sys.version_info.minor < 10:
-    from typing_extensions import TypeAlias
-else:
-    from typing import TypeAlias
+from .aliases import TypeAlias
 
 
 class StatusNodeContent(TypedDict):
