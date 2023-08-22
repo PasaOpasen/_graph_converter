@@ -1,5 +1,5 @@
 
-from typing import Dict, Tuple
+from typing import Dict, Tuple, Sequence, List
 
 import re
 
@@ -44,5 +44,39 @@ def get_string_vars(s: str) -> Dict[Tuple[int, int], str]:
         (m.start(), m.end()): s[m.start(): m.end()].strip('{ }')
         for m in _var_pattern.finditer(s)
     }
+
+
+def add_numbers_to_sorted(seq: Sequence, sep: str = '.') -> List[str]:
+    """
+    adds numbers to names to keep them in sorted order
+    Args:
+        seq:
+        sep:
+
+    Returns:
+
+    >>> _ = add_numbers_to_sorted
+    >>> _([1, 2, 3])
+    ['1.1', '2.2', '3.3']
+    >>> _((1, 2), sep='|')
+    ['1|1', '2|2']
+    >>> _(list(range(12)))
+    ['01.0', '02.1', '03.2', '04.3', '05.4', '06.5', '07.6', '08.7', '09.8', '10.9', '11.10', '12.11']
+    """
+
+    count = len(seq)
+    count = len(str(count))
+
+    return [
+        f"{str(i).rjust(count, '0')}{sep}{v}"
+        for i, v in enumerate(seq, 1)
+    ]
+
+
+
+
+
+
+
 
 
