@@ -19,7 +19,8 @@
             "title": "1",
             "description": "Патология"
         },
-        "1d25efb7-efc8-4581-8353-1c5d1f79f8bf": "<="
+        "1d25efb7-efc8-4581-8353-1c5d1f79f8bf": "<=",
+        "c2f0313b-816c-4317-a48b-374d916cd241": ">="
     },
     "diagramData": {
         "id": "8f558fef-73d8-446a-9487-a2d0a6bc1885",
@@ -193,7 +194,7 @@
                                 "id": "88883063-be0c-4f4f-b9c0-5788ad8430a6",
                                 "type": "point",
                                 "x": 321,
-                                "y": 210
+                                "y": 209
                             }
                         ],
                         "labels": [],
@@ -221,7 +222,7 @@
                                 "id": "a8c1b198-aa77-49bd-8355-e3d7a54283bc",
                                 "type": "point",
                                 "x": 321,
-                                "y": 235
+                                "y": 234
                             }
                         ],
                         "labels": [],
@@ -243,7 +244,7 @@
                                 "id": "a90662a0-aa02-4e41-a6c6-d9a7c9764031",
                                 "type": "point",
                                 "x": 403,
-                                "y": 222.5
+                                "y": 221.5
                             },
                             {
                                 "id": "12d51124-757c-4e83-9b4d-5a7a0d2aa3b1",
@@ -506,13 +507,13 @@
                         "type": "operator",
                         "selected": true,
                         "x": 307,
-                        "y": 195,
+                        "y": 194,
                         "ports": [
                             {
                                 "id": "f130b2d7-6a68-4b80-9ea0-a08e233bf7cd",
                                 "type": "default",
                                 "x": 393,
-                                "y": 212.5,
+                                "y": 211.5,
                                 "name": "operator-out-blue",
                                 "alignment": "right",
                                 "parentNode": "c2f0313b-816c-4317-a48b-374d916cd241",
@@ -526,7 +527,7 @@
                                 "id": "b6f5805a-d897-4f14-bf69-82a731889407",
                                 "type": "default",
                                 "x": 311,
-                                "y": 200,
+                                "y": 199,
                                 "name": "operator-in-blue",
                                 "alignment": "left",
                                 "parentNode": "c2f0313b-816c-4317-a48b-374d916cd241",
@@ -540,7 +541,7 @@
                                 "id": "a9b18191-bbed-449f-8fbf-e6778ca5121c",
                                 "type": "default",
                                 "x": 311,
-                                "y": 225,
+                                "y": 224,
                                 "name": "operator-in-red",
                                 "alignment": "left",
                                 "parentNode": "c2f0313b-816c-4317-a48b-374d916cd241",

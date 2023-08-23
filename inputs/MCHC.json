@@ -12,7 +12,8 @@
             "title": "1",
             "description": "Патология"
         },
-        "91d58ebf-a35d-4d54-a32e-9e5be76331dd": "<="
+        "91d58ebf-a35d-4d54-a32e-9e5be76331dd": "<=",
+        "ef06cc1f-96ce-4290-81ef-d4822fc251e8": ">="
     },
     "diagramData": {
         "id": "8f558fef-73d8-446a-9487-a2d0a6bc1885",

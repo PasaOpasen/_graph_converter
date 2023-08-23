@@ -13,7 +13,8 @@
             "description": "Патология"
         },
         "39996a66-365c-45a8-9a6c-dafab18cf535": "ТТГ",
-        "f94ab658-9249-4516-ab59-a28c608b5da8": "<="
+        "f94ab658-9249-4516-ab59-a28c608b5da8": "<=",
+        "9bbe50ce-5b14-433b-9b15-e6e326e8fdbf": ">="
     },
     "diagramData": {
         "id": "8f558fef-73d8-446a-9487-a2d0a6bc1885",
@@ -171,7 +172,7 @@
                     "c01b9fc1-10c3-4844-9ba6-4eaf55d222bd": {
                         "id": "c01b9fc1-10c3-4844-9ba6-4eaf55d222bd",
                         "type": "default",
-                        "selected": true,
+                        "selected": false,
                         "source": "39996a66-365c-45a8-9a6c-dafab18cf535",
                         "sourcePort": "1a21dbbc-5532-4949-8502-bca4b97c5f4c",
                         "target": "f94ab658-9249-4516-ab59-a28c608b5da8",
@@ -199,7 +200,7 @@
                     "36b9f827-8d9c-407c-a138-f0727bacfa88": {
                         "id": "36b9f827-8d9c-407c-a138-f0727bacfa88",
                         "type": "default",
-                        "selected": true,
+                        "selected": false,
                         "source": "9fa06ca0-b122-4de9-8415-ad2fbd547a3f",
                         "sourcePort": "78e06e32-4185-41b1-beee-694b72189828",
                         "target": "f94ab658-9249-4516-ab59-a28c608b5da8",
@@ -227,7 +228,7 @@
                     "c76c04f7-c854-41e1-84da-cf1609d7e3f8": {
                         "id": "c76c04f7-c854-41e1-84da-cf1609d7e3f8",
                         "type": "default",
-                        "selected": true,
+                        "selected": false,
                         "source": "f94ab658-9249-4516-ab59-a28c608b5da8",
                         "sourcePort": "3846970a-8b25-4f11-bf05-2c928ea8051a",
                         "target": "4e4144d8-41bd-40c2-b49a-fc53e472827a",
@@ -447,7 +448,7 @@
                     "9bbe50ce-5b14-433b-9b15-e6e326e8fdbf": {
                         "id": "9bbe50ce-5b14-433b-9b15-e6e326e8fdbf",
                         "type": "operator",
-                        "selected": false,
+                        "selected": true,
                         "x": 218,
                         "y": 101,
                         "ports": [
@@ -498,7 +499,7 @@
                     "f94ab658-9249-4516-ab59-a28c608b5da8": {
                         "id": "f94ab658-9249-4516-ab59-a28c608b5da8",
                         "type": "operator",
-                        "selected": true,
+                        "selected": false,
                         "x": 212,
                         "y": 210,
                         "ports": [

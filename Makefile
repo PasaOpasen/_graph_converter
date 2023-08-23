@@ -5,3 +5,10 @@ jsons:
 
 doctest:
 	venv/bin/python -m pytest --doctest-modules ./conv
+
+t:
+	venv/bin/python test.py
+
+
+
+

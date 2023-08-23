@@ -12,7 +12,8 @@
             "title": "1",
             "description": "Патология"
         },
-        "787dd431-3d59-4a86-b889-41d8d2bb7fad": "<="
+        "787dd431-3d59-4a86-b889-41d8d2bb7fad": "<=",
+        "6d52d6e6-4cef-43bc-9050-5137e50e6529": ">="
     },
     "diagramData": {
         "id": "8f558fef-73d8-446a-9487-a2d0a6bc1885",
@@ -102,7 +103,7 @@
                                 "id": "02e7d9cd-dbaa-4ade-a994-537eb572b291",
                                 "type": "point",
                                 "x": 264,
-                                "y": 94
+                                "y": 93
                             }
                         ],
                         "labels": [],
@@ -130,7 +131,7 @@
                                 "id": "443120ce-d6cd-45eb-94a3-418c050e4761",
                                 "type": "point",
                                 "x": 264,
-                                "y": 119
+                                "y": 118
                             }
                         ],
                         "labels": [],
@@ -152,7 +153,7 @@
                                 "id": "1130e51a-6ba9-4a85-a772-947bee2081a0",
                                 "type": "point",
                                 "x": 346,
-                                "y": 106.5
+                                "y": 105.5
                             },
                             {
                                 "id": "84cc7e89-a2e8-47e0-a8e5-190730fac710",
@@ -170,7 +171,7 @@
                     "c2409b3b-91f4-4039-95f6-c3db3d884fea": {
                         "id": "c2409b3b-91f4-4039-95f6-c3db3d884fea",
                         "type": "default",
-                        "selected": true,
+                        "selected": false,
                         "source": "a1741c24-27dc-4710-9a27-37108f98c740",
                         "sourcePort": "41096e27-6392-476f-9ce6-e724c0e9e825",
                         "target": "787dd431-3d59-4a86-b889-41d8d2bb7fad",
@@ -198,7 +199,7 @@
                     "c2f8439c-5864-421b-9397-d6cfea4fbe61": {
                         "id": "c2f8439c-5864-421b-9397-d6cfea4fbe61",
                         "type": "default",
-                        "selected": true,
+                        "selected": false,
                         "source": "0c784935-635e-4647-889f-6cb28b6e137b",
                         "sourcePort": "0ecc9b8f-7515-4682-80e0-a4b8e009ece0",
                         "target": "787dd431-3d59-4a86-b889-41d8d2bb7fad",
@@ -226,7 +227,7 @@
                     "c585906e-3365-463d-a8a3-88bc3955c12d": {
                         "id": "c585906e-3365-463d-a8a3-88bc3955c12d",
                         "type": "default",
-                        "selected": true,
+                        "selected": false,
                         "source": "787dd431-3d59-4a86-b889-41d8d2bb7fad",
                         "sourcePort": "7b7e0452-53e7-4d96-84d8-0f8c57feebc0",
                         "target": "005e87ea-3144-4cb4-849a-42d8db904d17",
@@ -445,7 +446,7 @@
                     "787dd431-3d59-4a86-b889-41d8d2bb7fad": {
                         "id": "787dd431-3d59-4a86-b889-41d8d2bb7fad",
                         "type": "operator",
-                        "selected": true,
+                        "selected": false,
                         "x": 250,
                         "y": 173,
                         "ports": [
@@ -496,15 +497,15 @@
                     "6d52d6e6-4cef-43bc-9050-5137e50e6529": {
                         "id": "6d52d6e6-4cef-43bc-9050-5137e50e6529",
                         "type": "operator",
-                        "selected": false,
+                        "selected": true,
                         "x": 250,
-                        "y": 79,
+                        "y": 78,
                         "ports": [
                             {
                                 "id": "cfa4d829-9127-40e4-9dc6-c4592f0937ef",
                                 "type": "default",
                                 "x": 336,
-                                "y": 96.5,
+                                "y": 95.5,
                                 "name": "operator-out-blue",
                                 "alignment": "right",
                                 "parentNode": "6d52d6e6-4cef-43bc-9050-5137e50e6529",
@@ -518,7 +519,7 @@
                                 "id": "c897c5c0-c64d-459e-92d8-a18f7e119359",
                                 "type": "default",
                                 "x": 254,
-                                "y": 84,
+                                "y": 83,
                                 "name": "operator-in-blue",
                                 "alignment": "left",
                                 "parentNode": "6d52d6e6-4cef-43bc-9050-5137e50e6529",
@@ -532,7 +533,7 @@
                                 "id": "1c4b9fae-6005-4744-a62b-0eaab14ece9e",
                                 "type": "default",
                                 "x": 254,
-                                "y": 109,
+                                "y": 108,
                                 "name": "operator-in-red",
                                 "alignment": "left",
                                 "parentNode": "6d52d6e6-4cef-43bc-9050-5137e50e6529",
