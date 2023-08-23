@@ -1,0 +1,34 @@
+description: Суплемент_В12
+name: Суплемент_В12
+nodes:
+  1:
+    children: 2 3
+    code: Возраст > 60
+  2:
+    children: 6 5
+    code: (Вит_В12_в_крови < 197) and (Вит_В12_в_крови > 150)
+  3:
+    children: 7 4
+    code: (Вит_В12_в_крови < 197) and (Вит_В12_в_крови > 150)
+  4:
+    children: 9 10
+    code: Вит_В12_в_крови < 150
+  5:
+    children: 8 11
+    code: Вит_В12_в_крови < 150
+  6:
+    code: .res 1
+  7:
+    code: .res 2
+  8:
+    code: .res 3
+  9:
+    code: .res 4
+  10:
+    code: .res 6
+  11:
+    code: .res 5
+statuses:
+  none: none
+tag: ''
+user: 0

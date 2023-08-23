@@ -1,0 +1,93 @@
+description: Гемоглобин
+name: Гемоглобин
+nodes:
+  1:
+    children: 20 2
+    code: ___16282____ == 0
+  2:
+    children: 11 3 6 8 9 12 13 14 15 15
+    code: '$expr Гемоглобин > 175
+
+      ___expr == True
+
+      yield ___expr == False
+
+      yield ___expr == False
+
+      yield ___expr == False
+
+      yield ___expr == False
+
+      yield ___expr == False
+
+      yield ___expr == False
+
+      yield ___expr == False
+
+      ___expr == False'
+  3:
+    children: 14 4
+    code: ___230____ == 0
+  4:
+    children: 13 15 5 5
+    code: '$expr Ср_об_эритроцита > 99
+
+      yield ___expr == True
+
+      ___expr == True
+
+      ___expr == False'
+  5:
+    children: 16 17
+    code: (___3180____ == 0) and (___3154____ == 0)
+  6:
+    children: 11 7
+    code: ___283____ == 0
+  7:
+    children: 18 16
+    code: Ср_сод_гемоглоб_в_эритроците > 380
+  8:
+    children: 13 15 16 13 15 16 16
+    code: '$expr ___485____ == 0
+
+      yield ___expr == True
+
+      yield ___expr == True
+
+      ___expr == True
+
+      yield ___expr == False
+
+      yield ___expr == False
+
+      ___expr == False'
+  9:
+    children: 12 10
+    code: ___1027____ == 0
+  10:
+    children: 16 19
+    code: Железо_в_сыворотке < 11
+  11:
+    code: ___10864
+  12:
+    code: ___835
+  13:
+    code: ___15443
+  14:
+    code: ___9701
+  15:
+    code: ___1021
+  16:
+    code: .res Дефицит_железа
+  17:
+    code: .res Обследование
+  18:
+    code: .res Сфероцитоз
+  19:
+    code: .res Обследование
+  20:
+    code: .res Норма
+statuses:
+  none: none
+tag: ''
+user: 0

@@ -1,0 +1,72 @@
+description: Ferritin
+name: Ferritin
+nodes:
+  1:
+    children: 8 2
+    code: (Ферритин >= 20) and (Ферритин <= 120)
+  2:
+    children: 9 3 4 5 15 15
+    code: '$expr Ферритин < 20
+
+      ___expr == True
+
+      yield ___expr == False
+
+      yield ___expr == False
+
+      yield ___expr == False
+
+      ___expr == False'
+  3:
+    children: 4 10
+    code: (___3180____ == 0) and (___3154____ == 0)
+  4:
+    children: 5 11
+    code: ___3159____ == 0
+  5:
+    children: 15 6 7 7
+    code: '$expr ___9701____ == 0
+
+      ___expr == True
+
+      yield ___expr == False
+
+      ___expr == False'
+  6:
+    children: 7 12 14 14
+    code: '$expr ___18487____ == 0
+
+      ___expr == True
+
+      yield ___expr == False
+
+      ___expr == False'
+  7:
+    children: 6 13 14 14
+    code: '$expr ___16325____ == 0
+
+      ___expr == True
+
+      yield ___expr == False
+
+      ___expr == False'
+  8:
+    code: .res 0
+  9:
+    code: .res 1
+  10:
+    code: .res Обследование
+  11:
+    code: .res Обследование_
+  12:
+    code: .res Один_вне_нормы
+  13:
+    code: .res Один_вне_нормы
+  14:
+    code: .res Оба_вне_нормы
+  15:
+    code: ___15443
+statuses:
+  none: none
+tag: ''
+user: 0

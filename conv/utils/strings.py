@@ -14,7 +14,13 @@ def fix_string_name(s: str) -> str:
     >>> _('a b.c-e')
     'a_b_c_e'
     """
-    return s.replace(' ', '_').replace('-', '_').replace('.', '_').strip()
+    s = s.replace(' ', '_').\
+        replace('-', '_').replace(',', '.').\
+        replace('.', '_').strip()
+
+    if re.match(r"\d+_\d+", s):
+        s = s.replace('_', '.')
+    return s
 
 
 def name_to_tree_call(s: str) -> str:

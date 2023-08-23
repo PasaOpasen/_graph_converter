@@ -1,9 +1,9 @@
-description: ТТГ
-name: ТТГ
+description: СРБ
+name: СРБ
 nodes:
   1:
     children: 2 3
-    code: (ТТГ >= 0.27) and (ТТГ <= 4.2)
+    code: СРБ <= 1
   2:
     code: .res 0
   3:

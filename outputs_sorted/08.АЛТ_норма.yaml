@@ -1,0 +1,14 @@
+description: АЛТ_норма
+name: АЛТ_норма
+nodes:
+  1:
+    children: 2 3
+    code: АЛТ <= 60
+  2:
+    code: .res 9
+  3:
+    code: .res 1
+statuses:
+  none: none
+tag: ''
+user: 0

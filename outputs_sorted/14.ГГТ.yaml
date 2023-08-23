@@ -1,9 +1,9 @@
-description: ТТГ
-name: ТТГ
+description: ГГТ
+name: ГГТ
 nodes:
   1:
     children: 2 3
-    code: (ТТГ >= 0.27) and (ТТГ <= 4.2)
+    code: (ГГТ >= 10) and (ГГТ <= 71)
   2:
     code: .res 0
   3:
