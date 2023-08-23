@@ -1,0 +1,42 @@
+description: Билирубин
+name: Билирубин
+nodes:
+  1:
+    children: 4 2 3 3
+    code: '$expr Билирубин <= 21
+
+      ___expr == True
+
+      yield ___expr == False
+
+      ___expr == False'
+  2:
+    children: 3 6 7 7
+    code: '$expr ___{{ Непрямой_билирубин }}____ == 0
+
+      ___expr == True
+
+      yield ___expr == False
+
+      ___expr == False'
+  3:
+    children: 2 5 7 7
+    code: '$expr ___{{ Прямой_билирубин }}____ == 0
+
+      ___expr == True
+
+      yield ___expr == False
+
+      ___expr == False'
+  4:
+    code: .res 0
+  5:
+    code: .res Один_вне_нормы
+  6:
+    code: .res Один_вне_нормы
+  7:
+    code: .res Оба_вне_нормы
+statuses:
+  none: none
+tag: ''
+user: 0

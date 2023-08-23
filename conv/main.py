@@ -89,6 +89,7 @@ class Condition:
         if self.nodes[left]['type'] == 'data':  # change order to ensure the parameter will be at left
             right, left = left, right
 
+        assert left and right, (left, right, operator)
         self.ops.append(
             (left, operator, right)
         )

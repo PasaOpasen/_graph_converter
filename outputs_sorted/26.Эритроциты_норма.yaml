@@ -1,0 +1,14 @@
+description: Эритроциты_норма
+name: Эритроциты_норма
+nodes:
+  1:
+    children: 2 3
+    code: (Эритроциты >= 4,2) and (Эритроциты <= 5,6)
+  2:
+    code: .res 0
+  3:
+    code: .res 1
+statuses:
+  none: none
+tag: ''
+user: 0

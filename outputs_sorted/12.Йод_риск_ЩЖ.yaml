@@ -1,0 +1,19 @@
+description: Йод_риск_ЩЖ
+name: Йод_риск_ЩЖ
+nodes:
+  1:
+    children: 3 2
+    code: (Йод <= 120) and (Йод >= 80)
+  2:
+    children: 5 4
+    code: (Йод > 200) and (Йод < 60)
+  3:
+    code: .res 0_баллов
+  4:
+    code: .res 7_баллов
+  5:
+    code: .res 10_баллов
+statuses:
+  none: none
+tag: ''
+user: 0
