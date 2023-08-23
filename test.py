@@ -36,4 +36,4 @@ if __name__ == '__main__':
     #     'inputs/ЛПНП.json',
     #     'tmp.yml'
     # )
-    main(raise_on_errors=True)
+    main(raise_on_errors=False)

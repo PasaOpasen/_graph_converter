@@ -101,7 +101,7 @@ def dumps_yaml(dct: Dict[str, Any]):
         2: 2
     """
     import yaml
-    return yaml.dump(dct, encoding='utf-8', allow_unicode=True).decode()
+    return yaml.dump(dct, encoding='utf-8', allow_unicode=True, width=100000).decode()
 
 
 def parse_yaml(
