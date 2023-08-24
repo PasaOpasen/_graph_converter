@@ -1,0 +1,14 @@
+description: Метилмалоновая_к_та_норма
+name: Метилмалоновая_к_та_норма
+nodes:
+  1:
+    children: 2 3
+    code: Метилмалоновая_к_та <= 2.4
+  2:
+    code: .res 0
+  3:
+    code: .res 1
+statuses:
+  none: none
+tag: ''
+user: 0

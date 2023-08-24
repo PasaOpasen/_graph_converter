@@ -3,6 +3,8 @@ from pathlib import Path
 
 from traceback import print_exc
 
+from conv.utils.strings import fix_string_name
+
 from conv.main import conv
 from conv.ordering import order_graphs
 
@@ -16,7 +18,8 @@ def main(raise_on_errors: bool = False):
 
         def call():
             conv(
-                str(f), f"outputs/{f.stem}.yaml"
+                str(f),
+                f"outputs/{fix_string_name(f.stem)}.yaml"
             )
 
         if raise_on_errors:
