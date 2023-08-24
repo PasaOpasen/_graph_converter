@@ -2,10 +2,10 @@ description: Ferritin
 name: Ferritin
 nodes:
   1:
-    children: 8 2
+    children: 9 2
     code: (Ферритин >= 20) and (Ферритин <= 120)
   2:
-    children: 9 3 4 5 15 15
+    children: 10 3 4 5 16 16
     code: '$expr Ферритин < 20
 
       ___expr == True
@@ -18,54 +18,41 @@ nodes:
 
       ___expr == False'
   3:
-    children: 4 10
+    children: 4 11
     code: (___{{ СОЭ }}____ == 0) and (___{{ СРБ }}____ == 0)
   4:
-    children: 5 11
+    children: 5 12
     code: ___{{ ТТГ }}____ == 0
   5:
-    children: 15 6 7 7
-    code: '$expr ___{{ Билирубин }}____ == 0
-
-      ___expr == True
-
-      yield ___expr == False
-
-      ___expr == False'
+    children: 16 7
+    code: ___{{ Билирубин }}____ == 0
   6:
-    children: 7 12 14 14
-    code: '$expr ___{{ Непрямой_билирубин }}____ == 0
-
-      ___expr == True
-
-      yield ___expr == False
-
-      ___expr == False'
+    children: 15 14
+    code: ___{{ Непрямой_билирубин }}____ == 1
   7:
-    children: 6 13 14 14
-    code: '$expr ___{{ Прямой_билирубин }}____ == 0
-
-      ___expr == True
-
-      yield ___expr == False
-
-      ___expr == False'
+    children: 6 8
+    code: ___{{ Прямой_билирубин }}____ == 1
   8:
-    code: .res 0
+    children: 13 17
+    code: ___{{ Непрямой_билирубин }}____ == 1
   9:
-    code: .res 1
+    code: .res 0
   10:
-    code: .res Обследование
+    code: .res 1
   11:
-    code: .res Обследование_
+    code: .res Обследование
   12:
-    code: .res Один_вне_нормы
+    code: .res Обследование_
   13:
     code: .res Один_вне_нормы
   14:
-    code: .res Оба_вне_нормы
+    code: .res Один_вне_нормы
   15:
+    code: .res Оба_вне_нормы
+  16:
     code: ___{{ Витамин_В12_в_крови }}
+  17:
+    code: .res Норма
 statuses:
   none: none
 tag: ''

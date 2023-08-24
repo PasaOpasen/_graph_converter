@@ -1,4 +1,6 @@
 
+c:
+	echo -n "" > db.csv
 
 jsons:
 	bash db2jsons.sh
