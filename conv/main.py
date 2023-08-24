@@ -197,7 +197,7 @@ class Condition:
         return res
 
 
-def conv_dict(d: JsonInput) -> Dict[int, Union[YamlNormalNode, YamlStatusNode]]:
+def conv_dict_core(d: JsonInput) -> Dict[int, Union[YamlNormalNode, YamlStatusNode]]:
 
     contents = d['analyses']
 
@@ -252,23 +252,28 @@ def conv_dict(d: JsonInput) -> Dict[int, Union[YamlNormalNode, YamlStatusNode]]:
     return result
 
 
+def conv_dict(d: JsonInput, name: str) -> YamlTree:
+    d = conv_dict_core(d)
+    yaml_tree: YamlTree = dict(
+        nodes=d,
+        user=0,
+        tag='',
+        description=name,
+        name=name,
+        statuses={'none': 'none'}
+    )
+    return yaml_tree
+
+
 def conv(js_path: str, yaml_path: str):
 
     dct = read_json(js_path)
     f_name = fix_string_name(Path(js_path).stem)
 
-    d = conv_dict(dct)
-
-    yaml_tree: YamlTree = dict(
-        nodes=d,
-        user=0,
-        tag='',
-        description=f_name,
-        name=f_name,
-        statuses={'none': 'none'}
-    )
+    yaml_tree = conv_dict(dct, name=f_name)
 
     y = dumps_yaml(yaml_tree)
+
     mkdir_of_file(yaml_path)
     write_text(yaml_path, y)
 
